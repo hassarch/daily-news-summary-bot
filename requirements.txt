@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+requests
+langchain
+openai
+feedparser
+beautifulsoup4
+newspaper3k
