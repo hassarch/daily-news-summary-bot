@@ -28,8 +28,7 @@ app/
 
 ### Prerequisites
 
-- Python 3.8+
-- Ollama installed and running locally
+- Docker and Docker Compose installed
 - News API key
 - Email credentials (for email delivery)
 - Optional: Telegram bot token or Discord webhook
@@ -42,25 +41,7 @@ git clone <repository-url>
 cd <project-directory>
 ```
 
-2. Create and activate virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Install and start Ollama:
-```bash
-# Install Ollama from https://ollama.ai
-# Pull a model (e.g., llama2, mistral)
-ollama pull llama2
-```
-
-5. Configure environment variables:
+2. Configure environment variables:
 ```bash
 cp .env.example .env
 ```
@@ -82,9 +63,51 @@ TELEGRAM_CHAT_ID=your_chat_id
 DISCORD_WEBHOOK_URL=your_webhook_url
 ```
 
-### Running the Application
+### Running with Docker (Recommended)
 
-Start the FastAPI server:
+1. Start the application:
+```bash
+docker-compose up -d
+```
+
+2. Pull an Ollama model (first time only):
+```bash
+docker exec -it ollama ollama pull llama2
+```
+
+3. Access the API at `http://localhost:8000`
+
+4. View logs:
+```bash
+docker-compose logs -f app
+```
+
+5. Stop the application:
+```bash
+docker-compose down
+```
+
+### Running without Docker
+
+1. Create and activate virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Install and start Ollama:
+```bash
+# Install Ollama from https://ollama.ai
+# Pull a model (e.g., llama2, mistral)
+ollama pull llama2
+```
+
+4. Start the FastAPI server:
 ```bash
 uvicorn app.main:app --reload
 ```
